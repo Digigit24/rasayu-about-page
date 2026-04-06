@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rasayu | Modern Corporate Landing Page</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Rasayu Ayurved Clinic - Specialized Ayurvedic treatment for Chronic Liver Disease and Liver Cirrhosis. Clinical case series showing significant positive outcomes.">
+    <meta name="keywords" content="Rasayu, Ayurveda therapy, Chronic liver disease, Liver Cirrhosis, Complementary and Alternative Medicine, clinical outcomes">
+    
+    <!-- Google Fonts: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-navy: #7f1d1d; /* Deep Red from Logo */
+            --secondary-navy: #450a0a;
+            --accent-teal: #f59e0b; /* Golden Orange from Logo */
+            --accent-purple: #b91c1c;
+            --text-main: #334155;
+            --text-light: #f8fafc;
+            --white: #ffffff;
+            --transition-smooth: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            background-color: #fef2f2; /* Very light red tint */
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- 1. PERFECT LOADER --- */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-navy), #450a0a);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s cubic-bezier(0.7, 0, 0.3, 1), visibility 1s ease;
+        }
+
+        .loader-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--accent-teal);
+            animation: spin 1.5s linear infinite;
+        }
+
+        .loader-ring-inner {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-bottom-color: var(--white);
+            animation: spin-reverse 1s linear infinite;
+        }
+
+        .loader-icon {
+            color: var(--white);
+            font-size: 2rem;
+            animation: pulse-logo 2s ease-in-out infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 0% { transform: rotate(0deg); } 100% { transform: rotate(-360deg); } }
+        @keyframes pulse-logo { 0%, 100% { opacity: 0.6; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
+
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* --- 2. HEADER SECTION --- */
+        .main-header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .logo-img {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+            transition: var(--transition-smooth);
+        }
+        
+        .badge-img {
+            height: 85px;
+            width: auto;
+            object-fit: contain;
+            transition: var(--transition-smooth);
+        }
+
+        .logo-box:hover .logo-img, 
+        .logo-box:hover .badge-img {
+            transform: scale(1.05);
+        }
+
+        /* --- 3. ABOUT SECTION --- */
+        .hero-section {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 0;
+        }
+
+        .about-card {
+            background: var(--white);
+            padding: 5rem 4rem;
+            border-radius: 40px;
+            box-shadow: 0 40px 80px rgba(127, 29, 29, 0.1);
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            border: 1px solid rgba(127, 29, 29, 0.05);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .about-card.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Decorative Background Blob */
+        .about-card::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--accent-teal), transparent);
+            top: -60px;
+            right: -60px;
+            opacity: 0.1;
+            z-index: -1;
+            filter: blur(50px);
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: linear-gradient(90deg, rgba(178, 34, 34, 0.1), rgba(245, 158, 11, 0.1));
+            color: var(--primary-navy);
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        .about-title {
+            font-size: clamp(2.4rem, 7vw, 3.8rem);
+            font-weight: 800;
+            color: var(--primary-navy);
+            margin-bottom: 2.5rem;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+        }
+
+        .about-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #4b5563;
+            margin-top: 1.5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: justify;
+        }
+
+        .highlight {
+            color: var(--primary-navy);
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(245, 158, 11, 0.2);
+            z-index: -1;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3.5rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .stat-item h3 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--accent-teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-navy);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- 7. BONUS: BACKGROUND GRADIENT MESH --- */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .mesh-blob {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.1;
+            animation: float 250s infinite alternate;
+        }
+
+        .blob-1 { top: -300px; left: -200px; background: var(--primary-navy); }
+        .blob-2 { bottom: -300px; right: -200px; background: var(--accent-teal); animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(200px, 200px) rotate(180deg); }
+        }
+
+        /* --- BUTTONS --- */
+        .btn-premium {
+            background: linear-gradient(135deg, var(--primary-navy), var(--accent-purple));
+            color: var(--white);
+            border: none;
+            padding: 18px 45px;
+            border-radius: 100px;
+            font-weight: 700;
+            transition: var(--transition-smooth);
+            box-shadow: 0 15px 35px rgba(127, 29, 29, 0.25);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(127, 29, 29, 0.4);
+            color: var(--white);
+        }
+
+        /* --- RESPONSIVENESS --- */
+        @media (max-width: 992px) {
+            .about-card { padding: 4rem 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .logo-container { justify-content: center; transform: scale(0.9); }
+            .about-card { padding: 3rem 1.5rem; margin: 0 1rem; }
+            .about-title { font-size: 2.2rem; }
+            .hero-section { padding: 40px 0; }
+        }
+
+        @media (max-width: 576px) {
+            .logo-box { flex-basis: 100%; justify-content: center; }
+            .about-text { font-size: 1.15rem; text-align: left; }
+            .logo-img, .badge-img { height: 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Background Layer -->
+    <div class="bg-mesh">
+        <div class="mesh-blob blob-1"></div>
+        <div class="mesh-blob blob-2"></div>
+    </div>
+
+    <!-- 1. PERFECT LOADER -->
+    <div id="loader-wrapper">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-ring-inner"></div>
+            <div class="loader-icon">
+                <i class="fas fa-microscope"></i>
+            </div>
+        </div>
+        <div class="mt-4 text-center">
+            <h5 class="text-white fw-bold" style="letter-spacing: 5px; text-transform: uppercase; font-size: 1rem;">Clinical Excellence</h5>
+            <p class="text-white opacity-75 mt-2" style="font-weight: 300;">Personalized Ayurvedic Solutions</p>
+        </div>
+    </div>
+
+    <!-- 2. HEADER SECTION -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo-container">
+                <!-- Left Logo -->
+                <a href="#" class="logo-box">
+                    <img src="Rasayu Ayurved Clinic.png" alt="Rasayu Ayurved Clinic Logo" class="logo-img">
+                </a>
+                
+                <!-- Right Logo (Badge) -->
+                <a href="#" class="logo-box">
+                    <img src="rasayu logo 30 years.png" alt="Celebrating 30 Years" class="badge-img">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. ABOUT SECTION -->
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-11">
+                        <div class="about-card" id="about-card">
+                            <span class="section-tag">Clinical Case Series</span>
+                            <h1 class="about-title">Treating Chronic Liver Disease with <span class="highlight">Ayurvedic Innovation</span></h1>
+                            <p class="about-text">
+                                Recent developments in the understanding of liver cirrhosis and its complications have significantly improved patient life expectancy. However, for many, liver transplantation remains the only curative option—a procedure often hindered by technical challenges and exorbitant costs. 
+                                <br><br>
+                                At <span class="highlight">Rasayu Ayurved Clinic</span>, we are bridging this gap through Complementary and Alternative Medicine (CAM). Our published research demonstrates the profound potential of <span class="highlight">exclusive Ayurveda therapy</span> consisting of orally administered herbo-mineral formulations. 
+                                <br><br>
+                                In a recent case series, male patients diagnosed with radio-logically confirmed liver cirrhosis underwent treatment for 6 to 9 months. The therapeutic outcomes were transformative: patients with gross, moderate, and mild ascites saw <span class="highlight">complete resolution</span>, alongside significant reductions in total bilirubin levels, showcasing Ayurveda as a viable, non-surgical therapeutic option for liver cirrhosis management.
+                            </p>
+                            
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <h3>0.53</h3>
+                                    <p>Post-Therapy Bilirubin</p>
+                                </div>
+                                <div class="stat-item">
+                                    <h3>100%</h3>
+                                    <p>Ascites Resolution</p>
+                                </div>
+                                <div class="stat-item">
+                                    <h3>30+</h3>
+                                    <p>Years of Legacy</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-5">
+                                <button class="btn btn-premium btn-lg">View Full Case Study</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap & Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loader = document.getElementById('loader-wrapper');
+            const aboutCard = document.getElementById('about-card');
+
+            // --- 1. LOADER LOGIC ---
+            window.addEventListener('load', () => {
+                // Keep loader for 2.8 seconds as requested
+                setTimeout(() => {
+                    loader.classList.add('loader-hidden');
+                    
+                    // Reveal the about section after loader fades
+                    setTimeout(() => {
+                        aboutCard.classList.add('reveal');
+                    }, 500);
+                    
+                }, 2800);
+            });
+
+            // --- INTERACTIVITY ---
+            // Subtle scroll effect for header
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.main-header');
+                if (window.scrollY > 50) {
+                    header.style.padding = '0.8rem 0';
+                    header.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
+                } else {
+                    header.style.padding = '1.2rem 0';
+                    header.style.boxShadow = 'none';
+                }
+            });
+
+            // Intersection Observer for scroll reveal (in case user adds more content)
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal');
+                    }
+                });
+            }, observerOptions);
+
+            observer.observe(aboutCard);
+        });
+    </script>
+</body>
+</html>
