@@ -341,11 +341,6 @@
 
 <body>
 
-    <!-- 1. DEBUG BAR -->
-    <div id="debug-bar" title="Click to hide">
-        <span>Width: <span id="w-val">0</span>px</span>
-        <i class="fas fa-times"></i>
-    </div>
 
     <!-- 2. LOADER -->
     <div id="loader-wrapper">
@@ -383,42 +378,42 @@
                         </div>
 
                         <div class="correspondence">
-                            Correspondence – Yogesh Bendale – rasyaurpublication2020@gmail.com <br>
-                            <span class="small opacity-75">Rasayu Ayurved Clinic, Flat No.1 and 2, Shreevijaya Apts,
-                                Pune 411 052, India</span>
+                            Correspondence Yogesh Bendale rasyampublication2020@gmail. com <br>
+                            <span class="small opacity-75">Rasayu Ayurved Clinic, Flat No. 1 and 2, Shreevijaya Apts,
+                                Madhusan-chay Society, Neelkamal Society, Ganesh Nagar, Karve Nagar, Pune 411 052,
+                                India</span>
                         </div>
 
                         <div class="about-text">
                             <p>
                                 Recent developments in the understanding of the natural history and pathophysiology of
-                                liver cirrhosis and the management of its complications have improved patient care,
-                                quality of life, and life expectancy. However, for a limited number of patients, liver
-                                transplantation is the only curative option. Even today, liver surgery remains one of
-                                the most technically challenging surgical procedures in abdominal surgery. The
-                                exorbitant cost involved in this procedure also is a factor for many patients to avoid
-                                surgery.
+                                liver cirrhosis and the management of its complica-tions have improved patient care,
+                                quality of life, and life expectancy.
                             </p>
 
                             <p>
-                                There are few evidences which highlight that Complementary and Alternative Medicine
-                                (CAM) is frequently used by chronic liver disease (CLD) patients to treat CLD-specific
-                                health issues. In India, Ayurvedic is one of the main complementary therapies used by
-                                patients with CLD. However, there is paucity of evidence about its efficacy in
-                                management of patients with CLD.
+                                However, for a limited number of patients, liver transplantation is the only curative
+                                option. Even today, liver surgery remains one of the most technically challenging
+                                surgical procedure in abdominal surgery. The exorbitant cost involved in this procedure
+                                also, is a factor for many patients to avoid surgery. There are few evidences which
+                                highlights that Complementary and Alternative Medicine (CAM) is frequently used by
+                                chronic liver disease (CLD) patients to treat CLD-specific health issues. In India,
+                                Ayurvedic is one of the main complimentary therapies used by patients with CLD. However,
+                                there is paucity of evidence about its efficacy in management of patients with CLD.
                             </p>
 
                             <p>
-                                Here, we are reporting three cases of male patients with liver cirrhosis. These patients
-                                reported to our outpatient department with a radiologically confirmed diagnosis of liver
+                                Here, we are reporting three cases of male patients with liver cir-rhosis. These patients
+                                reported to our outpatient department with a radio-logically confirmed diagnosis of liver
                                 cirrhosis. They were treated for 6, 9 and 9 months respectively with exclusive Ayurveda
-                                therapy consisting of orally administered Herbo-mineral Ayurveda formulations. Their
-                                total bilirubin at baseline vs. end of therapy were <span class="highlight">3.15 vs.
-                                    0.53, 7.7 vs. 0.9, 2.1 vs. 0.9</span> respectively.
+                                fherapy consisting of orally administered Herbo-mineral Ayurveda formulations. Their
+                                total bilirubin at baseline vs. end of therapy were 3.15 vs. 0.53, 7.7 vs. 0.9, 2.1 vs.
+                                0.9 respectively.
                             </p>
 
                             <p>
                                 These patients were having gross, moderate and mild ascites respectively at baseline,
-                                which <span class="highlight">resolved completely</span> after the treatment.
+                                which resolved completely after the treatment.
                             </p>
 
                             <p>
@@ -428,17 +423,12 @@
                                 willing to opt for surgical approach in liver cirrhosis management. However, further
                                 studies are required to generate high level of evidence.
                             </p>
+
+                            <p class="mt-4">
+                                <span class="fw-bold">Keywords</span> Ayurveda therapy, Chronic liver disease,
+                                Complementary and Alternative Medicine
+                            </p>
                         </div>
-
-                        <!-- Testimonial Section -->
-                        <div class="testimonial-box">
-                            <p class="testimonial-text">"The resolution of ascites and significant bilirubin reduction
-                                in our patients highlights the transformative potential of standardized Ayurvedic
-                                compounds."</p>
-                            <div class="small fw-bold mt-2">— Research Excellence Lead</div>
-                        </div>
-
-
                     </article>
                 </div>
             </div>
@@ -462,31 +452,7 @@
             }, 1500);
         });
 
-        // --- 2. DEBUG BAR LOGIC ---
-        const debugBar = document.getElementById('debug-bar');
-        const wSpan = document.getElementById('w-val');
-        let hideTimeout;
-
-        const updateWidth = () => {
-            wSpan.innerText = window.innerWidth;
-            debugBar.classList.add('active');
-
-            clearTimeout(hideTimeout);
-            hideTimeout = setTimeout(() => {
-                debugBar.classList.remove('active');
-            }, 2000); // Hide after 2 seconds of inactivity
-        };
-
-        window.addEventListener('resize', updateWidth);
-        updateWidth(); // Initial show
-
-        // Click to hide immediately
-        debugBar.addEventListener('click', () => {
-            debugBar.classList.remove('active');
-            clearTimeout(hideTimeout);
-        });
-
-        // --- 3. ACCESSIBILITY CHECK ---
+        // --- 2. ACCESSIBILITY CHECK ---
         // Basic log to ensure no horizontal scroll
         if (document.body.scrollWidth > window.innerWidth) {
             console.warn("Horizontal scroll detected! Check for overflowing elements.");
