@@ -247,15 +247,31 @@
         /* --- 6. DEBUG BAR --- */
         #debug-bar {
             position: fixed;
-            bottom: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
+            top: 20px;
+            right: 20px;
+            background: var(--primary-red);
             color: #fff;
-            padding: 5px 10px;
-            font-size: 11px;
-            z-index: 10000;
-            pointer-events: none;
-            border-radius: 5px 0 0 0;
+            padding: 8px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 10001;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: opacity 0.4s ease, transform 0.3s ease, visibility 0.4s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+        }
+
+        #debug-bar.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
 
         /* --- MEDIA QUERIES --- */
@@ -326,12 +342,15 @@
 <body>
 
     <!-- 1. DEBUG BAR -->
-    <div id="debug-bar">Width: <span id="w-val">0</span>px</div>
+    <div id="debug-bar" title="Click to hide">
+        <span>Width: <span id="w-val">0</span>px</span>
+        <i class="fas fa-times"></i>
+    </div>
 
     <!-- 2. LOADER -->
     <div id="loader-wrapper">
         <div class="spinner"></div>
-        <div class="mt-3 text-white fw-bold small text-uppercase" style="letter-spacing: 2px;">Loading Rasayu</div>
+        <div class="mt-3 text-white fw-bold small text-uppercase" style="letter-spacing: 2px;"></div>
     </div>
 
     <!-- 3. HEADER -->
@@ -444,10 +463,28 @@
         });
 
         // --- 2. DEBUG BAR LOGIC ---
+        const debugBar = document.getElementById('debug-bar');
         const wSpan = document.getElementById('w-val');
-        const updateWidth = () => { wSpan.innerText = window.innerWidth; };
+        let hideTimeout;
+
+        const updateWidth = () => {
+            wSpan.innerText = window.innerWidth;
+            debugBar.classList.add('active');
+
+            clearTimeout(hideTimeout);
+            hideTimeout = setTimeout(() => {
+                debugBar.classList.remove('active');
+            }, 2000); // Hide after 2 seconds of inactivity
+        };
+
         window.addEventListener('resize', updateWidth);
-        updateWidth();
+        updateWidth(); // Initial show
+
+        // Click to hide immediately
+        debugBar.addEventListener('click', () => {
+            debugBar.classList.remove('active');
+            clearTimeout(hideTimeout);
+        });
 
         // --- 3. ACCESSIBILITY CHECK ---
         // Basic log to ensure no horizontal scroll
